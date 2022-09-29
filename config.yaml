@@ -1,0 +1,43 @@
+kites:
+  - zId: ''
+    zPass: ''
+    zPin: ''
+  - zId: ''
+    zPass: ''
+    zPin: ''
+cdsl:
+  boid: 
+  pan: 
+databases:
+  redis:
+    host: 
+    port: 
+  postgresql:
+    host: 
+    port: 
+    database: ''
+    user: ''
+    password: ''
+nicenames:
+  - ADANIGREEN
+  - RELIANCE
+  # - ITC
+  # - M&M
+  # - ABB
+  # - POLYPLEX
+  - BEL
+  # - HINDUNILVR
+  # - PAYTM
+  # - VEDL
+  # - HDFCBANK
+  # - ADANIENT
+  # - SBIN
+  # - HAL
+  # - HEROMOTOCO
+  # - ADANITRANS
+  # - ADANIPORTS
+  # - TITAN
+  # - KEI
+  # - WIPRO
+  # - INFY
+  # - CONCOR
