@@ -1,0 +1,8 @@
+selenium
+grpcio
+grpcio-tools
+pandas
+rich
+redis
+psycopg2-binary
+glob
