@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+service Kiter {
+  rpc ShowDict (KiteRequest) returns (KiteReply) {}
+  rpc FetchCandles (Instrument) returns (stream CandleStick) {}
+  rpc FetchInstruments (KiteRequest) returns (stream Instrument) {}
+  rpc SubmitIfThenElseOrder (OrderIfThenElse) returns (KiteReply) {}
+  rpc FetchIfThenElseOrders (KiteRequest) returns (stream OrderIfThenElse) {}
+  rpc ClearIfThenElseOrders (KiteRequest) returns (KiteReply) {}
+  rpc FetchKiteOrders (KiteRequest) returns (stream OrderKite) {}
+  rpc Command(KiteRequest) returns (KiteReply) {}
+}
+
+message OrderIfThenElse {
+  Instrument instrument = 1;
+  int32 quantity = 2;
+  int32 p5if = 3;
+  OrderStatus statusif = 4;
+  google.protobuf.Timestamp timeif = 16;
+  int32 p5then = 5;
+  OrderStatus statusthen = 6;
+  google.protobuf.Timestamp timethen = 17;
+  int32 p5else = 7;
+  OrderStatus statuselse = 8;
+  google.protobuf.Timestamp timeelse = 18;
+  bool stoploss = 9;
+  string orderby = 10;
+  google.protobuf.Timestamp ordertime = 19;
+  int32 split = 11;
+  bool papertrade = 12;
+
+}
+
+message OrderKite {
+  Instrument instrument = 1;
+  google.protobuf.Timestamp ordertime = 2;
+  OrderStatus status = 3;
+  enum Trade {
+    BUY = 0;
+    SELL = 1;
+  }
+  Trade trade = 4;
+  enum Product {
+    MIS = 0;
+    CNC = 1;
+  }
+  Product product = 5;
+  int32 quantity = 6;
+  int32 avgp5 = 7;
+}
+
+
+message CandleStick {
+  int32 minuteindex = 1;
+  int32 p5high = 2;
+  int32 p5open = 3;
+  int32 p5close = 4;
+  int32 p5low = 5;
+  int32 volg = 6;
+}
+
+message OrderType {
+  enum Type {
+    EXECUTED = 0;
+    OPEN = 1;
+  }
+  Type type = 1;
+}
+
+enum OrderStatus {
+  NOTSUBMITTED = 0;
+  COMPLETE = 1;
+  OPEN = 2;
+  CANCELLED = 3;
+}
+
+message Instrument {
+  string nicename = 1;
+  enum Exchange {
+    NSE = 0;
+    BSE = 1;
+  }
+  Exchange exchange = 2;
+}
+
+// message OrderResponse {
+//   string message = 1;
+// }
+
+message KiteRequest {
+  string msg = 1;
+}
+
+message KiteReply {
+  string msg = 1;
+}
