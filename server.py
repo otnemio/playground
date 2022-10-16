@@ -238,12 +238,12 @@ def serve(today:Today):
     server.wait_for_termination()
 
 
-def kitelogin(headless,today:Today):
+def kitelogin(headless,today:Today, PIN):
     if today.backtest == 0:
         kLogins=readConfig('kites')
         if kLogins:
-            kite = Kite(headless,today, kLogins[0]['zId'], kLogins[0]['zPass'], kLogins[0]['zPin'])
-        logging.info(f"{today.now():%H:%M:%S} {kite.welcome_msg}")
+            kite = Kite(headless,today, kLogins[0]['zId'], kLogins[0]['zPass'], PIN)
+            logging.info(f"{today.now():%H:%M:%S} {kite.welcome_msg}")
     else:
         kite = Kite(headless,today)
         logging.info(f"{today.now():%H:%M:%S} Backtest Ready")
@@ -338,8 +338,8 @@ def readCSV():
         logging.info(f'backup created.')
         shared_dict['Flag_MIDWORK']=False
 
-def flyKite(today:Today, headless):
-    kite = kitelogin(headless,today)
+def flyKite(today:Today, headless, PIN):
+    kite = kitelogin(headless,today, PIN)
     prep = False
     safe = False
     dfs = {}
@@ -657,9 +657,9 @@ if __name__ == '__main__':
     logging.info(f'headless: {headless}, backtest: T - {backtest}')
     today = Today(backtest)
     jobs = []
-    
+    PIN = input("Mobile App Code ")
     with mp.Pool() as pool:
-        jobs.append(pool.apply_async(flyKite, [today, headless]))
+        jobs.append(pool.apply_async(flyKite, [today, headless, PIN]))
         # jobs.append(pool.apply_async(flySecondKite, [today, headless]))
         # jobs.append(pool.apply_async(scrapefromNSE, []))
         jobs.append(pool.apply_async(serve, [today]))

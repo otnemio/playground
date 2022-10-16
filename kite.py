@@ -85,7 +85,7 @@ class Kite():
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             logging.error(f'{exc_type}, {fname}, {exc_tb.tb_lineno}')
             return False
-    
+
     def instruments(self,watchlist=0):
         try:
             if self.today.backtest:
