@@ -73,7 +73,7 @@ class Kite():
             wait.until(EC.presence_of_element_located((By.XPATH,"//input[@id='userid']"))).send_keys(ID)
             wait.until(EC.presence_of_element_located((By.XPATH,"//input[@id='password']"))).send_keys(PASS)
             wait.until(EC.element_to_be_clickable((By.XPATH,"//button[contains(.,'Login')]"))).click()
-            wait.until(EC.presence_of_element_located((By.XPATH,"//input[@label='PIN']"))).send_keys(PIN)
+            wait.until(EC.presence_of_element_located((By.XPATH,"//input[@label='Mobile App Code']"))).send_keys(PIN)
             wait.until(EC.element_to_be_clickable((By.XPATH,"//button[contains(.,'Continue')]"))).click()
 
             dash_div = wait.until(EC.presence_of_element_located((By.XPATH,"//div[@class='dashboard']//span[@class='nickname']/..")))
