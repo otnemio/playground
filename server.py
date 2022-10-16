@@ -354,7 +354,7 @@ def flyKite(today:Today, headless, PIN):
             withinMarketTime = lambda t : t >= today.time(9,15) and t < today.time(15,20)
             now = today.now()
             if withinMarketTime(now) and today.backtest == 0:
-                for i in range(1,6):
+                for i in range(1,2):
                     # give it some time
                     today.sleep(0.5)
                     # mid2_time=time.time()
@@ -368,9 +368,9 @@ def flyKite(today:Today, headless, PIN):
                             dfs[instrument]=hf.get(instrument)
                             update(dfs, today, now, instrument, p5)
                             shared_dict['instruments'][instrument]=pd.DataFrame(dfs[instrument],columns=['h','o','c','l','v'])
-                            # logging.info(f'{instrument} saved.')
+                            logging.info(f'{instrument} saved.')
                         shutil.copyfile(os.path.join('/tmp', "tmpfs", "market.hdf5"),os.path.join('/tmp', "tmpfs", "savedmarket.hdf5"))
-                        # logging.info(f'backup created.')
+                        logging.info(f'backup created.')
 
                         if shared_dict['Flag_AUTO']:
                             analyse_and_submit(dfs,today,now, instrument, p5)
