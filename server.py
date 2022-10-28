@@ -368,9 +368,11 @@ def flyKite(today:Today, headless, PIN):
                             dfs[instrument]=hf.get(instrument)
                             update(dfs, today, now, instrument, p5)
                             shared_dict['instruments'][instrument]=pd.DataFrame(dfs[instrument],columns=['h','o','c','l','v'])
-                            logging.info(f'{instrument} saved.')
+                            # logging.info(f'{instrument} saved.')
+                            time.sleep(0.1)
                         shutil.copyfile(os.path.join('/tmp', "tmpfs", "market.hdf5"),os.path.join('/tmp', "tmpfs", "savedmarket.hdf5"))
-                        logging.info(f'backup created.')
+                        # logging.info(f'backup created.')
+                        time.sleep(0.2)
 
                         if shared_dict['Flag_AUTO']:
                             analyse_and_submit(dfs,today,now, instrument, p5)
@@ -432,7 +434,7 @@ def update(dfs,today:Today, now:datetime, instrument:str, p5:int):
     c=dfs[instrument][j][2]
     l=dfs[instrument][j][3]
     v=dfs[instrument][j][4]
-    if o>=0:
+    if o>0:
         c=p5
         if h<p5:
             h=p5
