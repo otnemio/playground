@@ -7,4 +7,4 @@
   > ```myramdisk /tmp/tmpfs tmpfs defaults,size=8m,x-gvfs-show 0 0```
   
 * Run ```server.py```
-  > python server.py
+  > ```python server.py```
